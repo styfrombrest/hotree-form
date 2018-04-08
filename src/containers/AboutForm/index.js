@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Form from './Form';
-import Input from './Form/Input';
-import Select from './Form/Select';
+import Form from './../../components/Form/';
+import Input from './../../components/FormInput';
+import TextArea from './../../components/FormTextArea';
+import Select from './../../components/FormSelect';
+import Button from './../../components/Button/';
 
 const AboutFormElement = props => (
   <Form className="container" title={props.title}>
     <Input title="Title" required placeholder="Make it short and clear" />
-    <Input title="Description" required textarea placeholder="Write about your event be creative" />
+    <TextArea title="Description" required placeholder="Write about your event be creative" />
     <Select title="Category" placeholder="Select category(skills, interests, locations)" />
+
+    <Button title="Publish Event" uppercase clickHandler={() => console.log('click!')} />
   </Form>
 );
 

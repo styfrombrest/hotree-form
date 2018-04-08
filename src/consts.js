@@ -3,6 +3,7 @@ export const color = {
   blue: '#355990',
   silver: '#d8d8da',
   red: '#ffb2b2',
+  orange: '#ff8e1d',
 };
 
 export const headerWidth = '79px';

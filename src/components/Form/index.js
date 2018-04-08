@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { formShadow, color } from './../../consts';
 
-const Form = styled.div`
+const FormItem = styled.div`
   && {
     margin-top: 2em;
   }
@@ -28,16 +28,16 @@ const Title = styled.h2`
   padding: 0.5em 0 0.5em;
 `;
 
-const FormElement = props => (
-  <Form className="container">
+const Form = props => (
+  <FormItem className="container">
     <Title>{props.title}</Title>
     {props.children}
-  </Form>
+  </FormItem>
 );
 
-export default FormElement;
+export default Form;
 
-FormElement.propTypes = {
+Form.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
 };

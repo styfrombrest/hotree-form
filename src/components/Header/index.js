@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { headerWidth, headerBgColor, headerBorderColor, color } from './../consts';
+import { headerWidth, headerBgColor, headerBorderColor, color } from './../../consts';
 
 const Header = styled.header`
   background-color: ${headerBgColor};

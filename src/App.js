@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Header from './components/Header';
-import AboutForm from './components/AboutForm';
-import Form from './components/Form';
+import React from 'react';
+import Header from './components/Header/';
+import AboutForm from './containers/AboutForm/';
+// import Form from './components/Form/';
 
 import './global-styles';
 
@@ -10,9 +10,9 @@ const App = () => (
     <Header />
     <AboutForm title="About" />
 
-    <Form title="Coordinator" />
+    {/*     <Form title="Coordinator" />
 
-    <Form title="When" />
+    <Form title="When" /> */}
   </div>
 );
 
