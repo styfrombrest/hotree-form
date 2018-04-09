@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Form from './../../components/Form/';
 import Input from './../../components/FormInput';
+import Radio from './../../components/FormRadio';
 import TextArea from './../../components/FormTextArea';
 import Select from './../../components/FormSelect';
 
@@ -15,6 +16,7 @@ const mapStateToProps = state => ({
   category: state.formData.category,
   title: state.formData.title,
   description: state.formData.description,
+  paidEvent: state.formData.paidEvent,
   reward: state.formData.reward,
 });
 
@@ -27,7 +29,7 @@ class AboutFormElement extends React.Component {
 
   render() {
     const {
-      title, description, categories, category, reward,
+      title, description, categories, category, paidEvent, reward,
     } = this.props;
 
     return (
@@ -50,7 +52,7 @@ class AboutFormElement extends React.Component {
           placeholder="Select category (skills, interests, locations)"
           hint="Describes topic and people who should be interested in this event"
         />
-        {/* <Radio title="Payment" name="payment" data={payment} setData={this.props.setData} /> */}
+        <Radio title="Payment" name="payment" data={paidEvent} setData={this.props.setData} />
         <Input
           title="Reward"
           name="reward"
@@ -73,6 +75,7 @@ AboutFormElement.propTypes = {
   title: dataFieldPropType,
   description: dataFieldPropType,
   category: dataFieldPropType,
+  paidEvent: dataFieldPropType,
   reward: dataFieldPropType,
   categories: PropTypes.arrayOf(PropTypes.object),
   loadCategories: PropTypes.func,

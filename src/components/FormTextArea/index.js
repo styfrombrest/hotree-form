@@ -16,6 +16,7 @@ const Textarea = styled.textarea`
   width: 100%;
   padding: 0.5em;
   border: 1px solid ${color.silver};
+  resize: none;
 
   ::placeholder {
     color: ${color.silver};
@@ -51,7 +52,7 @@ const FormItemElement = (props) => {
   // const error = validator(name, value);
 
   return (
-    <FormItem title={title} required={required}>
+    <FormItem title={title} required={required} error={data.status === false}>
       <TextareaWrapper>
         <Textarea maxLength={`${inputMaxLength}`} placeholder={placeholder} value={data.value || ''} onChange={handleChange} />{' '}
         <TextareaHint>Max length {`${inputMaxLength}`} characters</TextareaHint>

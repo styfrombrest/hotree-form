@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Header from './components/Header/';
 import AboutForm from './containers/AboutForm/';
 import CoordinatorForm from './containers/CoordinatorForm/';
-import Form from './components/Form/';
+import WhenForm from './containers/WhenForm/';
 
 import Button from './components/Button/';
 import Message from './components/Message/';
@@ -46,7 +46,7 @@ const App = (props) => {
     <div>
       <AboutForm />
       <CoordinatorForm />
-      <Form title="When" />
+      <WhenForm />
 
       <Button title="Publish Event" disabled={isFormInvalid} uppercase clickHandler={() => props.submitForm(props.formData)} />
     </div>

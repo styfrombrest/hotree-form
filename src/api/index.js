@@ -18,6 +18,9 @@ export const submitFormApi = async formData =>
     // MOCK output
     const output = {};
     Object.keys(formData).map((key) => {
+      /*       switch (key) {
+        case ''
+      } */
       output[key] = formData[key].value;
       return true;
     });

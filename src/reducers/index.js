@@ -24,19 +24,34 @@ const initialState = {
       type: 'text',
       status: null,
     },
-    category_id: {
+    category: {
       value: null,
+    },
+    paidEvent: {
+      value: false,
     },
     reward: {
       value: null,
+      type: 'number',
+      status: null,
     },
     email: {
       value: null,
       type: 'email',
       status: null,
     },
-    employee: {
+    phone: {
       value: null,
+      type: 'phone',
+      status: null,
+    },
+    coordinator: {
+      value: 3,
+    },
+    duration: {
+      value: null,
+      type: 'number',
+      status: null,
     },
   },
 

@@ -11,8 +11,9 @@ import { dataFieldPropType } from './../../consts';
 
 const mapStateToProps = state => ({
   employees: state.employees,
-  employee: state.formData.employee,
+  coordinator: state.formData.coordinator,
   email: state.formData.email,
+  phone: state.formData.phone,
 });
 
 const mapDispatchToProps = { loadEmployees, setData };
@@ -23,20 +24,30 @@ class AboutFormElement extends React.Component {
   }
 
   render() {
-    const { employees, employee, email } = this.props;
+    const {
+      employees, coordinator, email, phone,
+    } = this.props;
 
     return (
       <Form className="container" title="Coordinator">
         <Select
           title="Responsible"
-          name="employee"
+          name="coordinator"
           list={employees}
-          data={employee}
+          data={coordinator}
           setData={this.props.setData}
           placeholder="Select responsible employee"
-          defaultValue={3}
         />
         <Input title="Email" name="email" data={email} required placeholder="Email" setData={this.props.setData} type="email" />
+        <Input
+          title="Phone"
+          name="phone"
+          data={phone}
+          required
+          placeholder="Phone"
+          setData={this.props.setData}
+          type="tel"
+        />
       </Form>
     );
   }
@@ -45,8 +56,9 @@ class AboutFormElement extends React.Component {
 export default connect(mapStateToProps, mapDispatchToProps)(AboutFormElement);
 
 AboutFormElement.propTypes = {
-  employee: dataFieldPropType,
+  coordinator: dataFieldPropType,
   email: dataFieldPropType,
+  phone: dataFieldPropType,
   employees: PropTypes.arrayOf(PropTypes.object),
   loadEmployees: PropTypes.func,
   setData: PropTypes.func,

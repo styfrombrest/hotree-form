@@ -17,6 +17,7 @@ const Title = styled.div`
   text-align: left;
   float: left;
   width: 18%;
+  min-width: 135px;
   color: ${color.blue};
   opacity: 0.7;
 `;
