@@ -12,14 +12,23 @@ import Message from './components/Message/';
 import './global-styles';
 
 import { submitForm } from './actions/';
+import validators from './validators/';
 
 const mapStateToProps = state => ({
   submit: state.submit,
   error: state.error,
+  formData: state.formData,
 });
 const mapDispatchToProps = { submitForm };
 
 const App = (props) => {
+  const { formData } = props;
+
+  const isFormInvalid = Object.keys(formData).some((key) => {
+    const { type, value } = formData[key];
+    return type ? !validators(type, value) : null;
+  });
+
   const message =
     props.submit && props.submit === true ? (
       <Message title="Success">Event has been created.</Message>
@@ -35,7 +44,7 @@ const App = (props) => {
       <Form title="Coordinator" />
       <Form title="When" />
 
-      <Button title="Publish Event" uppercase clickHandler={props.submitForm} />
+      <Button title="Publish Event" disabled={isFormInvalid} uppercase clickHandler={() => props.submitForm(props.formData)} />
     </div>
   );
 
@@ -54,4 +63,5 @@ App.propTypes = {
   submitForm: PropTypes.func,
   submit: PropTypes.bool,
   error: PropTypes.string,
+  formData: PropTypes.object,
 };

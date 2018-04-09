@@ -10,11 +10,22 @@ import {
 const initialState = {
   error: null,
   submit: null,
-  valid: false,
+  formData: {
+    title: {
+      value: null,
+      type: 'text',
+      status: null,
+    },
+    description: {
+      value: null,
+      type: 'text',
+      status: false,
+    },
+    category: {
+      value: null,
+    },
+  },
 
-  title: null,
-  description: null,
-  category: null,
   categories: [],
 };
 
@@ -31,7 +42,10 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, categories: [] };
 
     case SET_DATA:
-      return { ...state, [payload.id]: payload.value };
+      return {
+        ...state,
+        formData: { ...state.formData, [payload.name]: { ...state.formData[payload.name], value: payload.value, status: payload.status } },
+      };
 
     case SUBMIT_FORM_SUCCESS:
       return { ...state, submit: true, error: null };

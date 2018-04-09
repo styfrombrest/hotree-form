@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { color, inputMaxLength } from './../../consts';
+import { color, dataFieldPropType, inputMaxLength } from './../../consts';
 
 import FormItem from './../FormItem/';
+import validators from './../../validators/';
 
 const TextareaWrapper = styled.div`
   width: 100%;
@@ -39,22 +40,23 @@ const TextareaCounter = styled.div`
 
 const FormItemElement = (props) => {
   const {
-    title, validator, name, required, placeholder, value,
+    title, data, required, placeholder,
   } = props;
 
   const handleChange = (event) => {
-    props.setData(props.name, event.target.value);
+    const { value } = event.target;
+    props.setData(props.name, value, validators(data.type, value));
   };
 
-  const error = validator(name, value);
+  // const error = validator(name, value);
 
   return (
-    <FormItem title={title} error={error} required={required}>
+    <FormItem title={title} required={required}>
       <TextareaWrapper>
-        <Textarea maxLength={`${inputMaxLength}`} placeholder={placeholder} value={value || ''} onChange={handleChange} />{' '}
+        <Textarea maxLength={`${inputMaxLength}`} placeholder={placeholder} value={data.value || ''} onChange={handleChange} />{' '}
         <TextareaHint>Max length {`${inputMaxLength}`} characters</TextareaHint>
         <TextareaCounter>
-          {value ? value.length : 0}/{inputMaxLength}
+          {data.value ? data.value.length : 0}/{inputMaxLength}
         </TextareaCounter>
       </TextareaWrapper>
     </FormItem>
@@ -66,11 +68,10 @@ export default FormItemElement;
 FormItemElement.propTypes = {
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   setData: PropTypes.func,
   required: PropTypes.bool,
-  validator: PropTypes.func,
+  data: dataFieldPropType,
 };
 
 FormItemElement.defaultProps = {

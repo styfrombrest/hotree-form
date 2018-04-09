@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
+
 export const color = {
+  black: '#000',
   white: '#fff',
   blue: '#355990',
   silver: '#d8d8da',
@@ -19,6 +22,12 @@ export const messageBgColor = {
   success: color.whiteIceGreen,
   error: color.sundownRed,
 };
+
+export const dataFieldPropType = PropTypes.shape({
+  value: PropTypes.string,
+  type: PropTypes.string,
+  status: PropTypes.bool,
+});
 
 // ACTIONS
 export const LOAD_CATEGORIES_START = 'LOAD_CATEGORIES_START';

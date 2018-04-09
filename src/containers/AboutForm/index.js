@@ -7,15 +7,14 @@ import Input from './../../components/FormInput';
 import TextArea from './../../components/FormTextArea';
 import Select from './../../components/FormSelect';
 
-import { textValidator } from './../../validators/';
-
 import { loadCategories, setData } from './../../actions/';
+import { dataFieldPropType } from './../../consts';
 
 const mapStateToProps = state => ({
   categories: state.categories,
-  category: state.category,
-  title: state.title,
-  description: state.description,
+  category: state.formData.category,
+  title: state.formData.title,
+  description: state.formData.description,
 });
 
 const mapDispatchToProps = { loadCategories, setData };
@@ -32,20 +31,11 @@ class AboutFormElement extends React.Component {
 
     return (
       <Form className="container" title="About">
-        <Input
-          title="Title"
-          name="title"
-          value={title}
-          required
-          placeholder="Make it short and clear"
-          validator={textValidator}
-          setData={this.props.setData}
-        />
+        <Input title="Title" name="title" data={title} required placeholder="Make it short and clear" setData={this.props.setData} />
         <TextArea
           title="Description"
           name="description"
-          value={description}
-          validator={textValidator}
+          data={description}
           setData={this.props.setData}
           required
           placeholder="Write about your event be creative"
@@ -54,7 +44,7 @@ class AboutFormElement extends React.Component {
           title="Category"
           name="category"
           list={categories}
-          value={category}
+          data={category}
           setData={this.props.setData}
           placeholder="Select category (skills, interests, locations)"
           hint="Describes topic and people who should be interested in this event"
@@ -67,9 +57,9 @@ class AboutFormElement extends React.Component {
 export default connect(mapStateToProps, mapDispatchToProps)(AboutFormElement);
 
 AboutFormElement.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  category: PropTypes.number,
+  title: dataFieldPropType,
+  description: dataFieldPropType,
+  category: dataFieldPropType,
   categories: PropTypes.arrayOf(PropTypes.object),
   loadCategories: PropTypes.func,
   setData: PropTypes.func,
