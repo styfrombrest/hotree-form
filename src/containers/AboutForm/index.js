@@ -7,6 +7,8 @@ import Input from './../../components/FormInput';
 import TextArea from './../../components/FormTextArea';
 import Select from './../../components/FormSelect';
 
+import { textValidator } from './../../validators/';
+
 import { loadCategories, setData } from './../../actions/';
 
 const mapStateToProps = state => ({
@@ -30,8 +32,24 @@ class AboutFormElement extends React.Component {
 
     return (
       <Form className="container" title="About">
-        <Input title="Title" name="title" value={title} required placeholder="Make it short and clear" setData={this.props.setData} />
-        <TextArea title="Description" value={description} required placeholder="Write about your event be creative" />
+        <Input
+          title="Title"
+          name="title"
+          value={title}
+          required
+          placeholder="Make it short and clear"
+          validator={textValidator}
+          setData={this.props.setData}
+        />
+        <TextArea
+          title="Description"
+          name="description"
+          value={description}
+          validator={textValidator}
+          setData={this.props.setData}
+          required
+          placeholder="Write about your event be creative"
+        />
         <Select
           title="Category"
           list={categories}

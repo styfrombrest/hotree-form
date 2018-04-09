@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import { fetchQueue, loadBorder, loadBordersList, setFilter } from './../../actions';
-
 import Header from './components/Header/';
 import AboutForm from './containers/AboutForm/';
 // import Form from './components/Form/';

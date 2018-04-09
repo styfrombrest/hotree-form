@@ -37,49 +37,42 @@ const TextareaCounter = styled.div`
   float: right;
 `;
 
-class FormItemElement extends React.Component {
-  constructor(props) {
-    super(props);
+const FormItemElement = (props) => {
+  const handleChange = (event) => {
+    props.setData(props.name, event.target.value);
+  };
 
-    this.state = { value: props.value };
-    this.handleChange = this.handleChange.bind(this);
-  }
+  const {
+    title, validator, name, required, placeholder, value,
+  } = props;
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+  const error = validator(name, value);
 
-  render() {
-    const {
-      title, error, required, placeholder,
-    } = this.props;
-    const { value } = this.state;
-
-    return (
-      <FormItem title={title} error={error} required={required}>
-        <TextareaWrapper>
-          <Textarea maxLength={`${inputMaxLength}`} placeholder={placeholder} value={value} onChange={this.handleChange} />{' '}
-          <TextareaHint>Max length {`${inputMaxLength}`} characters</TextareaHint>
-          <TextareaCounter>
-            {value.length}/{inputMaxLength}
-          </TextareaCounter>
-        </TextareaWrapper>
-      </FormItem>
-    );
-  }
-}
+  return (
+    <FormItem title={title} error={error} required={required}>
+      <TextareaWrapper>
+        <Textarea maxLength={`${inputMaxLength}`} placeholder={placeholder} value={value || ''} onChange={handleChange} />{' '}
+        <TextareaHint>Max length {`${inputMaxLength}`} characters</TextareaHint>
+        <TextareaCounter>
+          {value ? value.length : 0}/{inputMaxLength}
+        </TextareaCounter>
+      </TextareaWrapper>
+    </FormItem>
+  );
+};
 
 export default FormItemElement;
 
 FormItemElement.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
+  setData: PropTypes.func,
   required: PropTypes.bool,
-  error: PropTypes.bool,
+  validator: PropTypes.func,
 };
 
 FormItemElement.defaultProps = {
   required: false,
-  error: false,
 };

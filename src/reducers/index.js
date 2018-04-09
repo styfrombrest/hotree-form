@@ -1,8 +1,8 @@
 import { LOAD_CATEGORIES_START, LOAD_CATEGORIES_SUCCESS, LOAD_CATEGORIES_FAILURE, SET_DATA } from './../consts';
 
 const initialState = {
-  title: 'tioasd',
-  description: 'test desc',
+  title: null,
+  description: null,
   category: null,
   categories: [],
 };

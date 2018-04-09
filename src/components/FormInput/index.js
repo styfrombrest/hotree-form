@@ -17,42 +17,36 @@ const Input = styled.input`
   }
 `;
 
-class FormItemElement extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
+const FormInput = (props) => {
+  const handleChange = (event) => {
+    props.setData(props.name, event.target.value);
+  };
 
-  handleChange(event) {
-    this.props.setData(this.props.name, event.target.value);
-  }
+  const {
+    value, title, required, placeholder, validator, name,
+  } = props;
 
-  render() {
-    const {
-      value, title, error, required, placeholder,
-    } = this.props;
+  const error = validator(name, value);
 
-    return (
-      <FormItem title={title} error={error} required={required}>
-        <Input value={value} placeholder={placeholder} onChange={this.handleChange} />
-      </FormItem>
-    );
-  }
-}
+  return (
+    <FormItem title={title} error={error} required={required}>
+      <Input value={value || ''} placeholder={placeholder} onChange={handleChange} />
+    </FormItem>
+  );
+};
 
-export default FormItemElement;
+export default FormInput;
 
-FormItemElement.propTypes = {
+FormInput.propTypes = {
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   setData: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  validator: PropTypes.func,
   required: PropTypes.bool,
-  error: PropTypes.bool,
 };
 
-FormItemElement.defaultProps = {
+FormInput.defaultProps = {
   required: false,
-  error: false,
 };
