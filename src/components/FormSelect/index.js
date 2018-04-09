@@ -5,7 +5,24 @@ import { color } from './../../consts';
 
 import FormItem from './../FormItem';
 
-const SelectItem = styled.select``;
+const SelectWrapper = styled.div`
+  margin: auto 1em;
+  width: 100%;
+  float: left;
+`;
+
+const SelectItem = styled.select`
+  float: left;
+  width: 100%;
+`;
+
+const SelectHint = styled.div`
+  color: ${color.silver};
+  text-align: left;
+  font-size: 0.75em;
+  font-style: italic;
+  float: left;
+`;
 
 class Select extends React.Component {
   constructor(props) {
@@ -21,15 +38,27 @@ class Select extends React.Component {
 
   render() {
     const {
-      title, error, required, placeholder,
+      title, error, required, placeholder, list, hint,
     } = this.props;
     const { value } = this.state;
 
+    const listView = list.map(item => (
+      <option key={item.id} value={item.id}>
+        {item.name}
+      </option>
+    ));
+
     return (
       <FormItem title={title} error={error} required={required}>
-        <SelectItem>
-          <option>123</option>
-        </SelectItem>
+        <SelectWrapper>
+          <SelectItem defaultValue="default">
+            <option disabled value="default">
+              {placeholder}
+            </option>
+            {listView}
+          </SelectItem>
+          <SelectHint>{hint}</SelectHint>
+        </SelectWrapper>
       </FormItem>
     );
   }
@@ -40,6 +69,8 @@ export default Select;
 Select.propTypes = {
   title: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  hint: PropTypes.string,
+  list: PropTypes.arrayOf(PropTypes.object),
   required: PropTypes.bool,
   error: PropTypes.bool,
 };

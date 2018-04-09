@@ -12,6 +12,7 @@ const ButtonItem = styled.button`
   cursor: pointer;
   color: ${color.white};
   text-transform: ${props => (props.uppercase ? 'uppercase' : 'none')};
+  margin: 2em auto;
 `;
 
 const Button = props => (

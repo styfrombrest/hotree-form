@@ -13,5 +13,8 @@
     "strict": 0,
     "max-len": [2, 140, 4]
   },
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  }
 }

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { color } from './../../consts';
+import { color, inputMaxLength } from './../../consts';
 
 import FormItem from './../FormItem/';
-
-const maxLength = 140;
 
 const TextareaWrapper = styled.div`
   width: 100%;
@@ -43,7 +41,7 @@ class FormItemElement extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { value: '' };
+    this.state = { value: props.value };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -60,10 +58,10 @@ class FormItemElement extends React.Component {
     return (
       <FormItem title={title} error={error} required={required}>
         <TextareaWrapper>
-          <Textarea maxLength={`${maxLength}`} placeholder={placeholder} value={value} onChange={this.handleChange} />{' '}
-          <TextareaHint>Max length 140 characters</TextareaHint>
+          <Textarea maxLength={`${inputMaxLength}`} placeholder={placeholder} value={value} onChange={this.handleChange} />{' '}
+          <TextareaHint>Max length {`${inputMaxLength}`} characters</TextareaHint>
           <TextareaCounter>
-            {value.length}/{maxLength}
+            {value.length}/{inputMaxLength}
           </TextareaCounter>
         </TextareaWrapper>
       </FormItem>
@@ -75,6 +73,7 @@ export default FormItemElement;
 
 FormItemElement.propTypes = {
   title: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   required: PropTypes.bool,
   error: PropTypes.bool,

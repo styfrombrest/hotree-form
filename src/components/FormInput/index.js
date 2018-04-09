@@ -20,24 +20,21 @@ const Input = styled.input`
 class FormItemElement extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { value: '' };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.props.setData(this.props.name, event.target.value);
   }
 
   render() {
     const {
-      title, error, required, placeholder,
+      value, title, error, required, placeholder,
     } = this.props;
-    const { value } = this.state;
 
     return (
       <FormItem title={title} error={error} required={required}>
-        <Input value={value} placeholder={placeholder} />
+        <Input value={value} placeholder={placeholder} onChange={this.handleChange} />
       </FormItem>
     );
   }
@@ -47,6 +44,9 @@ export default FormItemElement;
 
 FormItemElement.propTypes = {
   title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  setData: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   required: PropTypes.bool,
   error: PropTypes.bool,
