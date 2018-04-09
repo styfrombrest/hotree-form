@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Header from './components/Header/';
 import AboutForm from './containers/AboutForm/';
+import CoordinatorForm from './containers/CoordinatorForm/';
 import Form from './components/Form/';
 
 import Button from './components/Button/';
@@ -13,6 +14,7 @@ import './global-styles';
 
 import { submitForm } from './actions/';
 import validators from './validators/';
+import { dataFieldPropType } from './consts';
 
 const mapStateToProps = state => ({
   submit: state.submit,
@@ -24,6 +26,8 @@ const mapDispatchToProps = { submitForm };
 const App = (props) => {
   const { formData } = props;
 
+  // check is required data fields in store is valid
+  // and disable submit if not
   const isFormInvalid = Object.keys(formData).some((key) => {
     const { type, value } = formData[key];
     return type ? !validators(type, value) : null;
@@ -41,7 +45,7 @@ const App = (props) => {
   const form = (
     <div>
       <AboutForm />
-      <Form title="Coordinator" />
+      <CoordinatorForm />
       <Form title="When" />
 
       <Button title="Publish Event" disabled={isFormInvalid} uppercase clickHandler={() => props.submitForm(props.formData)} />
@@ -51,7 +55,6 @@ const App = (props) => {
   return (
     <div>
       <Header />
-
       {props.submit || props.error ? message : form}
     </div>
   );
@@ -63,5 +66,5 @@ App.propTypes = {
   submitForm: PropTypes.func,
   submit: PropTypes.bool,
   error: PropTypes.string,
-  formData: PropTypes.object,
+  formData: PropTypes.objectOf(dataFieldPropType),
 };

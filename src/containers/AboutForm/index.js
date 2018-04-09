@@ -15,6 +15,7 @@ const mapStateToProps = state => ({
   category: state.formData.category,
   title: state.formData.title,
   description: state.formData.description,
+  reward: state.formData.reward,
 });
 
 const mapDispatchToProps = { loadCategories, setData };
@@ -26,7 +27,7 @@ class AboutFormElement extends React.Component {
 
   render() {
     const {
-      title, description, categories, category,
+      title, description, categories, category, reward,
     } = this.props;
 
     return (
@@ -49,6 +50,18 @@ class AboutFormElement extends React.Component {
           placeholder="Select category (skills, interests, locations)"
           hint="Describes topic and people who should be interested in this event"
         />
+        {/* <Radio title="Payment" name="payment" data={payment} setData={this.props.setData} /> */}
+        <Input
+          title="Reward"
+          name="reward"
+          data={reward}
+          required
+          placeholder="Number"
+          setData={this.props.setData}
+          type="number"
+          inputStyle={{ width: '65px', float: 'left' }}
+          afterContent="reward points for attendance"
+        />
       </Form>
     );
   }
@@ -60,6 +73,7 @@ AboutFormElement.propTypes = {
   title: dataFieldPropType,
   description: dataFieldPropType,
   category: dataFieldPropType,
+  reward: dataFieldPropType,
   categories: PropTypes.arrayOf(PropTypes.object),
   loadCategories: PropTypes.func,
   setData: PropTypes.func,

@@ -24,7 +24,7 @@ export const messageBgColor = {
 };
 
 export const dataFieldPropType = PropTypes.shape({
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.string,
   status: PropTypes.bool,
 });
@@ -34,9 +34,9 @@ export const LOAD_CATEGORIES_START = 'LOAD_CATEGORIES_START';
 export const LOAD_CATEGORIES_SUCCESS = 'LOAD_CATEGORIES_SUCCESS';
 export const LOAD_CATEGORIES_FAILURE = 'LOAD_CATEGORIES_FAILURE';
 
-export const LOAD_EMPLOYES_START = 'LOAD_EMPLOYES_START';
-export const LOAD_EMPLOYES_SUCCESS = 'LOAD_EMPLOYES_SUCCESS';
-export const LOAD_EMPLOYES_FAILURE = 'LOAD_EMPLOYES_FAILURE';
+export const LOAD_EMPLOYEES_START = 'LOAD_EMPLOYEES_START';
+export const LOAD_EMPLOYEES_SUCCESS = 'LOAD_EMPLOYEES_SUCCESS';
+export const LOAD_EMPLOYEES_FAILURE = 'LOAD_EMPLOYEES_FAILURE';
 
 export const SET_DATA = 'SET_DATA';
 

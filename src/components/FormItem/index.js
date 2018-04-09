@@ -24,6 +24,11 @@ const Title = styled.div`
 const Body = styled.div`
   float: left;
   width: 60%;
+
+  &:after {
+    content: "${props => props.afterContent}";
+    float: left;
+  }
 `;
 
 const Emphasize = styled.span`
@@ -41,9 +46,9 @@ const Item = props => (
       {props.title}
       {props.required ? <Emphasize> *</Emphasize> : ''}
     </Title>
-    <Body>{props.children}</Body>
+    <Body afterContent={props.afterContent}>{props.children}</Body>
 
-    {props.error ? <Error>{props.title} can&apos;t be empty</Error> : null}
+    {props.error ? <Error>Enter correct value</Error> : null}
   </FormItem>
 );
 
@@ -52,6 +57,7 @@ export default Item;
 Item.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
+  afterContent: PropTypes.string,
   required: PropTypes.bool,
   error: PropTypes.bool,
 };

@@ -20,19 +20,17 @@ const Input = styled.input`
 
 const FormInput = (props) => {
   const {
-    data, title, required, placeholder,
+    data, title, required, placeholder, type, inputStyle, afterContent,
   } = props;
 
   const handleChange = (event) => {
-    // IMPLEMENT VALIDATION AND PASS TO ACTION
-    // validator(name, data, data.value)
     const { value } = event.target;
-    props.setData(props.name, value, validators(data.type, value));
+    props.setData(props.name, props.type === 'number' ? +value : value, validators(data.type, value));
   };
 
   return (
-    <FormItem title={title} error={data.status === false} required={required}>
-      <Input value={data.value || ''} placeholder={placeholder} onChange={handleChange} />
+    <FormItem title={title} error={data.status === false} required={required} afterContent={afterContent}>
+      <Input value={data.value || ''} placeholder={placeholder} onChange={handleChange} type={type} style={inputStyle} />
     </FormItem>
   );
 };
@@ -43,11 +41,15 @@ FormInput.propTypes = {
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   data: dataFieldPropType,
+  inputStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  afterContent: PropTypes.string,
   setData: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   required: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 FormInput.defaultProps = {
   required: false,
+  type: 'text',
 };
