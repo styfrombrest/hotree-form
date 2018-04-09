@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { formShadow, color } from './../../consts';
+import { color } from './../../consts';
 
 const FormItem = styled.div`
   && {
     margin-top: 2em;
   }
   background-color: ${color.white};
-  border-radius: 3px;
-  box-shadow: 0 0 5px ${formShadow};
   padding: 1em 2em;
 
   .error div,
@@ -29,7 +27,7 @@ const Title = styled.h2`
 `;
 
 const Form = props => (
-  <FormItem className="container">
+  <FormItem className="container pad">
     <Title>{props.title}</Title>
     {props.children}
   </FormItem>

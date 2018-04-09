@@ -38,13 +38,13 @@ const TextareaCounter = styled.div`
 `;
 
 const FormItemElement = (props) => {
-  const handleChange = (event) => {
-    props.setData(props.name, event.target.value);
-  };
-
   const {
     title, validator, name, required, placeholder, value,
   } = props;
+
+  const handleChange = (event) => {
+    props.setData(props.name, event.target.value);
+  };
 
   const error = validator(name, value);
 

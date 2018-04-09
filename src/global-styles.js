@@ -26,4 +26,9 @@ body {
   margin: 0 auto;
 }
 
+.pad {
+  border-radius: 3px;
+  box-shadow: 0 0 5px #ebebeb;
+}
+
 `;

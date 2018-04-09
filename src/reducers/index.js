@@ -1,6 +1,17 @@
-import { LOAD_CATEGORIES_START, LOAD_CATEGORIES_SUCCESS, LOAD_CATEGORIES_FAILURE, SET_DATA } from './../consts';
+import {
+  LOAD_CATEGORIES_START,
+  LOAD_CATEGORIES_SUCCESS,
+  LOAD_CATEGORIES_FAILURE,
+  SET_DATA,
+  SUBMIT_FORM_SUCCESS,
+  SUBMIT_FORM_FAILURE,
+} from './../consts';
 
 const initialState = {
+  error: null,
+  submit: null,
+  valid: false,
+
   title: null,
   description: null,
   category: null,
@@ -21,6 +32,11 @@ export default (state = initialState, { type, payload }) => {
 
     case SET_DATA:
       return { ...state, [payload.id]: payload.value };
+
+    case SUBMIT_FORM_SUCCESS:
+      return { ...state, submit: true, error: null };
+    case SUBMIT_FORM_FAILURE:
+      return { ...state, submit: false, error: 'Error!!!' };
     default:
       return state;
   }

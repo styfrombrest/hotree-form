@@ -1,5 +1,13 @@
-import { LOAD_CATEGORIES_START, LOAD_CATEGORIES_SUCCESS, LOAD_CATEGORIES_FAILURE, SET_DATA } from './../consts';
-import fetchCategoriesApi from './../api';
+import {
+  LOAD_CATEGORIES_START,
+  LOAD_CATEGORIES_SUCCESS,
+  LOAD_CATEGORIES_FAILURE,
+  SET_DATA,
+  SUBMIT_FORM_START,
+  SUBMIT_FORM_SUCCESS,
+  SUBMIT_FORM_FAILURE,
+} from './../consts';
+import { fetchCategoriesApi, submitFormApi } from './../api';
 
 export const loadCategories = () => async (dispatch) => {
   dispatch({
@@ -20,8 +28,8 @@ export const loadCategories = () => async (dispatch) => {
   }
 };
 
+// dispatch data from form
 export const setData = (id, value) => async (dispatch) => {
-  // debugger; // eslint-disable-line
   dispatch({
     type: SET_DATA,
     payload: {
@@ -31,4 +39,19 @@ export const setData = (id, value) => async (dispatch) => {
   });
 };
 
-export const setTitle = () => {};
+export const submitForm = () => async (dispatch) => {
+  dispatch({
+    type: SUBMIT_FORM_START,
+  });
+
+  try {
+    const result = await submitFormApi();
+    dispatch({
+      type: SUBMIT_FORM_SUCCESS,
+    });
+  } catch (err) {
+    dispatch({
+      type: SUBMIT_FORM_FAILURE,
+    });
+  }
+};

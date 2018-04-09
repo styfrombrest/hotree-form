@@ -24,7 +24,37 @@ const SelectHint = styled.div`
   float: left;
 `;
 
-class Select extends React.Component {
+const Select = (props) => {
+  const {
+    title, required, placeholder, list, hint, value,
+  } = props;
+
+  const handleChange = (event) => {
+    props.setData(props.name, event.target.value);
+  };
+
+  const listView = list.map(item => (
+    <option key={item.id} value={item.id}>
+      {item.name}
+    </option>
+  ));
+
+  return (
+    <FormItem title={title} required={required}>
+      <SelectWrapper>
+        <SelectItem defaultValue="default" value={value || undefined} onChange={handleChange}>
+          <option disabled value="default">
+            {placeholder}
+          </option>
+          {listView}
+        </SelectItem>
+        <SelectHint>{hint}</SelectHint>
+      </SelectWrapper>
+    </FormItem>
+  );
+};
+
+/* class Select extends React.Component {
   constructor(props) {
     super(props);
 
@@ -62,20 +92,21 @@ class Select extends React.Component {
       </FormItem>
     );
   }
-}
+} */
 
 export default Select;
 
 Select.propTypes = {
   title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  value: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  setData: PropTypes.func.isRequired,
   hint: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.object),
   required: PropTypes.bool,
-  error: PropTypes.bool,
 };
 
 Select.defaultProps = {
   required: false,
-  error: false,
 };

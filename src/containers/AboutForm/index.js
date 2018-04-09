@@ -52,8 +52,10 @@ class AboutFormElement extends React.Component {
         />
         <Select
           title="Category"
+          name="category"
           list={categories}
           value={category}
+          setData={this.props.setData}
           placeholder="Select category (skills, interests, locations)"
           hint="Describes topic and people who should be interested in this event"
         />

@@ -18,13 +18,13 @@ const Input = styled.input`
 `;
 
 const FormInput = (props) => {
-  const handleChange = (event) => {
-    props.setData(props.name, event.target.value);
-  };
-
   const {
     value, title, required, placeholder, validator, name,
   } = props;
+
+  const handleChange = (event) => {
+    props.setData(props.name, event.target.value);
+  };
 
   const error = validator(name, value);
 
