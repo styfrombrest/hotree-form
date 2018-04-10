@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { loadEmployees, setData };
 
-class AboutFormElement extends React.Component {
+class CoordinatorForm extends React.Component {
   componentDidMount() {
     this.props.loadEmployees();
   }
@@ -39,23 +39,15 @@ class AboutFormElement extends React.Component {
           placeholder="Select responsible employee"
         />
         <Input title="Email" name="email" data={email} required placeholder="Email" setData={this.props.setData} type="email" />
-        <Input
-          title="Phone"
-          name="phone"
-          data={phone}
-          required
-          placeholder="Phone"
-          setData={this.props.setData}
-          type="tel"
-        />
+        <Input title="Phone" name="phone" data={phone} required placeholder="Phone" setData={this.props.setData} type="tel" />
       </Form>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutFormElement);
+export default connect(mapStateToProps, mapDispatchToProps)(CoordinatorForm);
 
-AboutFormElement.propTypes = {
+CoordinatorForm.propTypes = {
   coordinator: dataFieldPropType,
   email: dataFieldPropType,
   phone: dataFieldPropType,

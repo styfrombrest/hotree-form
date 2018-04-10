@@ -8,10 +8,13 @@ export const validator = (type, value) => {
   // eslint-disable-next-line
   const email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const phone = /^[+]?[0-9]{9,12}$/;
+  const date = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
 
   switch (type) {
     case 'bool':
       return typeof value === 'boolean';
+    case 'date':
+      return !!(value && value.length > 0 && date.test(value));
     case 'text':
     case 'number':
       // debugger; // eslint-disable-line
@@ -31,9 +34,12 @@ export const validator = (type, value) => {
  * Is used to enable / disable app submit
  * @param {object} formData from store
  */
-export const isFormDataInvalid = (formData) => {
+export const isFormDataInvalid = formData =>
   Object.keys(formData).some((key) => {
-    const { type, value, depend } = formData[key];
+    const {
+      type, value, depend, status,
+    } = formData[key];
+    console.log(key, '!STATUS:', !status, !validator(type, value));
 
     // some of fields are necessary only if its dependencies has concrete values(e.g. fee)
     let isNecessaryToCheck = true;
@@ -48,6 +54,5 @@ export const isFormDataInvalid = (formData) => {
     }
 
     // validation
-    return isNecessaryToCheck && type ? !validator(type, value) : null;
+    return isNecessaryToCheck && !status && type ? !validator(type, value) : null;
   });
-};

@@ -23,7 +23,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { loadCategories, setData };
 
-class AboutFormElement extends React.Component {
+class AboutForm extends React.Component {
   componentDidMount() {
     this.props.loadCategories();
   }
@@ -84,9 +84,9 @@ class AboutFormElement extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutFormElement);
+export default connect(mapStateToProps, mapDispatchToProps)(AboutForm);
 
-AboutFormElement.propTypes = {
+AboutForm.propTypes = {
   title: dataFieldPropType,
   description: dataFieldPropType,
   category: dataFieldPropType,

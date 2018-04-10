@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { color } from './../../consts';
 
 const FormItem = styled.div`
-  padding: 1.5em 0;
+  padding: 14px 0 0;
   ::after {
     content: '';
     clear: both;
@@ -16,15 +16,16 @@ const Title = styled.div`
   text-transform: uppercase;
   text-align: left;
   float: left;
-  width: 18%;
-  min-width: 135px;
+  min-width: 120px;
   color: ${color.blue};
-  opacity: 0.7;
+  opacity: 0.8;
+  margin: 10px 0;
 `;
 
 const Body = styled.div`
   float: left;
-  width: 60%;
+  width: 78%;
+  margin: 10px 0;
 
   &:after {
     content: "${props => props.afterContent}";
@@ -37,21 +38,22 @@ const Emphasize = styled.span`
 `;
 
 const Error = styled(Emphasize)`
-  float: right;
+  float: left;
+  line-height: 28px;
 `;
 
 /* Form Item Wrapper */
 const Item = props => (
   <FormItem className={props.error ? 'error' : ''}>
-    {props.title !== null ? (
+    {props.title !== undefined ? (
       <Title>
-        {props.title}
+        {props.title || '\u00A0'}
         {props.title && props.title.length > 0 && props.required ? <Emphasize> *</Emphasize> : ''}
       </Title>
     ) : null}
-    <Body afterContent={props.afterContent}>{props.children}</Body>
-
-    {props.error ? <Error>Enter correct value</Error> : null}
+    <Body afterContent={props.afterContent}>
+      {props.children} {props.error ? <Error>Enter correct value</Error> : null}
+    </Body>
   </FormItem>
 );
 
@@ -66,7 +68,7 @@ Item.propTypes = {
 };
 
 Item.defaultProps = {
-  title: null,
+  title: undefined,
   required: false,
   error: false,
 };

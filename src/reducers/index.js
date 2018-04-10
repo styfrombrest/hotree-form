@@ -6,6 +6,7 @@ import {
   LOAD_EMPLOYEES_SUCCESS,
   LOAD_EMPLOYEES_FAILURE,
   SET_DATA,
+  SET_EVENT_DATETIME,
   SUBMIT_FORM_SUCCESS,
   SUBMIT_FORM_FAILURE,
 } from './../consts';
@@ -74,29 +75,13 @@ const initialState = {
     },
     date: {
       value: null,
-      type: 'text',
+      type: 'date',
       status: null,
     },
     time: {
       value: null,
       type: 'text',
       status: null,
-    },
-    timePeriod: {
-      value: 'am',
-      type: 'text',
-      values: [
-        {
-          id: 'am',
-          title: 'AM',
-          value: false,
-        },
-        {
-          id: 'pm',
-          title: 'PM',
-          value: true,
-        },
-      ],
     },
     duration: {
       value: null,
@@ -136,6 +121,19 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         formData: { ...state.formData, [payload.name]: { ...state.formData[payload.name], value: payload.value, status: payload.status } },
       };
+
+    case SET_EVENT_DATETIME: {
+      const { date: d, time: t } = payload;
+
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          date: { ...state.formData.date, value: d.value, status: d.status },
+          time: { ...state.formData.time, value: t.value, status: t.status },
+        },
+      };
+    }
 
     case SUBMIT_FORM_SUCCESS:
       return { ...state, submit: true, error: null };

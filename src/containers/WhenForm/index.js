@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import Form from './../../components/Form/';
 import Input from './../../components/FormInput';
-import Radio from './../../components/FormRadio';
 
 import { setData } from './../../actions/';
 import { dataFieldPropType } from './../../consts';
@@ -13,42 +13,75 @@ const mapStateToProps = state => ({
   duration: state.formData.duration,
   date: state.formData.date,
   time: state.formData.time,
-  timePeriod: state.formData.timePeriod,
 });
 
 const mapDispatchToProps = { setData };
 
-const AboutFormElement = (props) => {
-  const {
-    duration, date, time, timePeriod,
-  } = props;
+class WhenForm extends React.Component {
+  render() {
+    const { duration, date, time } = this.props;
 
-  return (
-    <Form className="container" title="When">
-      <Input title="Starts on" name="date" data={date} required setData={props.setData} type="date" />
-      <Input name="time" data={time} required setData={props.setData} type="time" inputStyle={{ width: '80px', float: 'left' }} />
-      <Radio name="timePeriod" data={timePeriod} setData={props.setData} />
-      <Input
-        title="Duration"
-        name="duration"
-        data={duration}
-        required
-        placeholder="Duration"
-        setData={props.setData}
-        type="number"
-        inputStyle={{ width: '80px', float: 'left' }}
-        afterContent="hour"
-      />
-    </Form>
-  );
-};
+    const dateTimeCheck = (obj) => {
+      const d = obj && obj.date ? obj.date : date.value;
+      const t = obj && obj.time ? obj.time : time.value;
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutFormElement);
+      // don't emphasize on first render
+      if (!d && !t) {
+        return null;
+      }
 
-AboutFormElement.propTypes = {
+      const format = 'YYYY-MM-DD HH:mm';
+      const dateTime = moment(`${d} ${t}`, format);
+      // console.log(`${d} ${t}`, dateTime.diff(moment()));
+      return dateTime.diff(moment()) >= 0;
+    };
+
+    const handleChange = (name, value) => {
+      // console.log('dateTimeCheck()', dateTimeCheck({ [name]: value }));
+      this.props.setData(name, value, dateTimeCheck({ [name]: value }));
+    };
+
+    return (
+      <Form className="container" title="When">
+        <Input
+          title="Starts on"
+          name="date"
+          data={{ ...date, status: dateTimeCheck() }}
+          required
+          setData={handleChange}
+          type="date"
+          min={moment().format('YYYY-MM-DD')}
+        />
+        <Input
+          title=""
+          name="time"
+          data={{ ...time, status: dateTimeCheck() }}
+          required
+          setData={handleChange}
+          type="time"
+          inputStyle={{ width: '95px', float: 'left' }}
+        />
+        <Input
+          title="Duration"
+          name="duration"
+          data={duration}
+          required
+          placeholder="Duration"
+          setData={this.props.setData}
+          type="number"
+          inputStyle={{ width: '80px', float: 'left' }}
+          afterContent="hour"
+        />
+      </Form>
+    );
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WhenForm);
+
+WhenForm.propTypes = {
   duration: dataFieldPropType,
   date: dataFieldPropType,
   time: dataFieldPropType,
-  timePeriod: dataFieldPropType,
   setData: PropTypes.func,
 };

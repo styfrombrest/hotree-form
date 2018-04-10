@@ -40,9 +40,17 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-input[type="date"]::-webkit-inner-spin-button {
+input[type="date"]::-webkit-inner-spin-button{
     display: none;
     -webkit-appearance: none;
 }
 
+input[type="time"]::-webkit-inner-spin-button  {
+  margin: -4px;
+ }
+
+ input[type="time"]::-webkit-clear-button,
+ input[type="date"]::-webkit-clear-button {
+   display: none;
+ }
 `;

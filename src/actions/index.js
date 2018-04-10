@@ -6,6 +6,7 @@ import {
   LOAD_EMPLOYEES_SUCCESS,
   LOAD_EMPLOYEES_FAILURE,
   SET_DATA,
+  SET_EVENT_DATETIME,
   SUBMIT_FORM_SUCCESS,
   SUBMIT_FORM_FAILURE,
 } from './../consts';
@@ -58,6 +59,13 @@ export const setData = (name, value, validationStatus) => async (dispatch) => {
       value,
       status: validationStatus,
     },
+  });
+};
+
+export const setEventDateTime = payload => async (dispatch) => {
+  dispatch({
+    type: SET_EVENT_DATETIME,
+    payload,
   });
 };
 

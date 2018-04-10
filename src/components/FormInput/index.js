@@ -7,11 +7,11 @@ import FormItem from './../FormItem/';
 import { validator } from './../../validators/';
 
 const Input = styled.input`
-  width: 100%;
-  height: 2em;
+  width: 65%;
+  float: left;
+  height: 28px;
   border: 1px solid ${color.silver};
-  padding: 0.5em;
-  margin: auto 1em;
+  padding: 5px;
 
   ::placeholder {
     color: ${color.silver};
@@ -20,7 +20,7 @@ const Input = styled.input`
 
 const FormInput = (props) => {
   const {
-    data, title, required, placeholder, type, inputStyle, afterContent,
+    data, title, required, placeholder, type, inputStyle, afterContent, min, max,
   } = props;
 
   const handleChange = (event) => {
@@ -30,7 +30,15 @@ const FormInput = (props) => {
 
   return (
     <FormItem title={title} error={data.status === false} required={required} afterContent={afterContent}>
-      <Input value={data.value || ''} placeholder={placeholder} onChange={handleChange} type={type} style={inputStyle} />
+      <Input
+        value={data.value || ''}
+        placeholder={placeholder}
+        onChange={handleChange}
+        type={type}
+        style={inputStyle}
+        min={min}
+        max={max}
+      />
     </FormItem>
   );
 };
@@ -47,10 +55,12 @@ FormInput.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   type: PropTypes.string,
+  min: PropTypes.string,
+  max: PropTypes.string,
 };
 
 FormInput.defaultProps = {
-  title: null,
+  title: undefined,
   required: false,
   type: 'text',
 };
