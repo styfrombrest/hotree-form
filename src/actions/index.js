@@ -10,7 +10,6 @@ import {
   SUBMIT_FORM_FAILURE,
 } from './../consts';
 import { fetchCategoriesApi, fetchEmployeesApi, submitFormApi } from './../api';
-// import validators from './../validators/';
 
 export const loadCategories = () => async (dispatch) => {
   dispatch({
@@ -64,7 +63,7 @@ export const setData = (name, value, validationStatus) => async (dispatch) => {
 
 export const submitForm = formData => async (dispatch) => {
   try {
-    const result = await submitFormApi(formData);
+    await submitFormApi(formData);
     dispatch({
       type: SUBMIT_FORM_SUCCESS,
     });

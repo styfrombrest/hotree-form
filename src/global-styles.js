@@ -40,4 +40,9 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
 `;

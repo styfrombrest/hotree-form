@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { color, dataFieldPropType } from './../../consts';
 
 import FormItem from './../FormItem/';
-import validators from './../../validators/';
+import { validator } from './../../validators/';
 
 const Input = styled.input`
   width: 100%;
@@ -25,7 +25,7 @@ const FormInput = (props) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
-    props.setData(props.name, value, validators(data.type, value));
+    props.setData(props.name, value, validator(data.type, value));
   };
 
   return (
@@ -38,18 +38,19 @@ const FormInput = (props) => {
 export default FormInput;
 
 FormInput.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   name: PropTypes.string.isRequired,
   data: dataFieldPropType,
   inputStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   afterContent: PropTypes.string,
   setData: PropTypes.func.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   required: PropTypes.bool,
   type: PropTypes.string,
 };
 
 FormInput.defaultProps = {
+  title: null,
   required: false,
   type: 'text',
 };

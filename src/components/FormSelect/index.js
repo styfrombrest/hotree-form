@@ -57,7 +57,7 @@ const Select = (props) => {
 export default Select;
 
 Select.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   data: dataFieldPropType,
@@ -69,6 +69,7 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
+  title: null,
   required: false,
   defaultValue: 'default',
 };

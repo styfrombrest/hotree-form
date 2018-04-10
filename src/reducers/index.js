@@ -28,7 +28,31 @@ const initialState = {
       value: null,
     },
     paidEvent: {
-      value: false,
+      value: 'free',
+      type: 'text',
+      values: [
+        {
+          id: 'free',
+          title: 'Free event',
+          value: false,
+        },
+        {
+          id: 'paid',
+          title: 'Paid event',
+          value: true,
+        },
+      ],
+    },
+    eventFee: {
+      value: null,
+      type: 'number',
+      depend: [
+        {
+          field: 'paidEvent',
+          value: 'paid',
+        },
+      ],
+      status: null,
     },
     reward: {
       value: null,
@@ -36,7 +60,7 @@ const initialState = {
       status: null,
     },
     email: {
-      value: null,
+      value: 'test@test.com',
       type: 'email',
       status: null,
     },
@@ -47,6 +71,32 @@ const initialState = {
     },
     coordinator: {
       value: 3,
+    },
+    date: {
+      value: null,
+      type: 'text',
+      status: null,
+    },
+    time: {
+      value: null,
+      type: 'text',
+      status: null,
+    },
+    timePeriod: {
+      value: 'am',
+      type: 'text',
+      values: [
+        {
+          id: 'am',
+          title: 'AM',
+          value: false,
+        },
+        {
+          id: 'pm',
+          title: 'PM',
+          value: true,
+        },
+      ],
     },
     duration: {
       value: null,

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { color, dataFieldPropType, inputMaxLength } from './../../consts';
 
 import FormItem from './../FormItem/';
-import validators from './../../validators/';
+import { validator } from './../../validators/';
 
 const TextareaWrapper = styled.div`
   width: 100%;
@@ -46,7 +46,7 @@ const FormItemElement = (props) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
-    props.setData(props.name, value, validators(data.type, value));
+    props.setData(props.name, value, validator(data.type, value));
   };
 
   // const error = validator(name, value);
@@ -67,7 +67,7 @@ const FormItemElement = (props) => {
 export default FormItemElement;
 
 FormItemElement.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   setData: PropTypes.func,

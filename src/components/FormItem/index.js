@@ -43,10 +43,12 @@ const Error = styled(Emphasize)`
 /* Form Item Wrapper */
 const Item = props => (
   <FormItem className={props.error ? 'error' : ''}>
-    <Title>
-      {props.title}
-      {props.required ? <Emphasize> *</Emphasize> : ''}
-    </Title>
+    {props.title !== null ? (
+      <Title>
+        {props.title}
+        {props.title && props.title.length > 0 && props.required ? <Emphasize> *</Emphasize> : ''}
+      </Title>
+    ) : null}
     <Body afterContent={props.afterContent}>{props.children}</Body>
 
     {props.error ? <Error>Enter correct value</Error> : null}
@@ -56,7 +58,7 @@ const Item = props => (
 export default Item;
 
 Item.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
   afterContent: PropTypes.string,
   required: PropTypes.bool,
@@ -64,6 +66,7 @@ Item.propTypes = {
 };
 
 Item.defaultProps = {
+  title: null,
   required: false,
   error: false,
 };

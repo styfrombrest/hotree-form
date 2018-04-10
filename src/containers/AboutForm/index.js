@@ -9,7 +9,7 @@ import TextArea from './../../components/FormTextArea';
 import Select from './../../components/FormSelect';
 
 import { loadCategories, setData } from './../../actions/';
-import { dataFieldPropType } from './../../consts';
+import { dataFieldPropType, radioFieldPropType } from './../../consts';
 
 const mapStateToProps = state => ({
   categories: state.categories,
@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
   title: state.formData.title,
   description: state.formData.description,
   paidEvent: state.formData.paidEvent,
+  eventFee: state.formData.eventFee,
   reward: state.formData.reward,
 });
 
@@ -29,7 +30,7 @@ class AboutFormElement extends React.Component {
 
   render() {
     const {
-      title, description, categories, category, paidEvent, reward,
+      title, description, categories, category, paidEvent, eventFee, reward,
     } = this.props;
 
     return (
@@ -52,7 +53,21 @@ class AboutFormElement extends React.Component {
           placeholder="Select category (skills, interests, locations)"
           hint="Describes topic and people who should be interested in this event"
         />
-        <Radio title="Payment" name="payment" data={paidEvent} setData={this.props.setData} />
+        <Radio title="Payment" name="paidEvent" data={paidEvent} setData={this.props.setData} />
+        {paidEvent.value && paidEvent.value === 'paid' ? (
+          <Input
+            title="Fee"
+            name="eventFee"
+            data={eventFee}
+            required
+            placeholder="Fee"
+            setData={this.props.setData}
+            type="number"
+            inputStyle={{ width: '50px', float: 'left' }}
+            afterContent="$"
+          />
+        ) : null}
+
         <Input
           title="Reward"
           name="reward"
@@ -75,7 +90,8 @@ AboutFormElement.propTypes = {
   title: dataFieldPropType,
   description: dataFieldPropType,
   category: dataFieldPropType,
-  paidEvent: dataFieldPropType,
+  paidEvent: radioFieldPropType,
+  eventFee: dataFieldPropType,
   reward: dataFieldPropType,
   categories: PropTypes.arrayOf(PropTypes.object),
   loadCategories: PropTypes.func,

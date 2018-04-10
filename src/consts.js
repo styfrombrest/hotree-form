@@ -27,6 +27,21 @@ export const dataFieldPropType = PropTypes.shape({
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.string,
   status: PropTypes.bool,
+  depend: PropTypes.arrayOf(PropTypes.shape({
+    field: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+  })),
+});
+
+export const radioFieldPropType = PropTypes.shape({
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+  type: PropTypes.string,
+  status: PropTypes.bool,
+  values: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    title: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+  })),
 });
 
 // ACTIONS

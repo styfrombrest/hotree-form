@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import Header from './components/Header/';
@@ -13,8 +14,12 @@ import Message from './components/Message/';
 import './global-styles';
 
 import { submitForm } from './actions/';
-import validators from './validators/';
+import { isFormDataInvalid } from './validators/';
 import { dataFieldPropType } from './consts';
+
+const FormsWrapper = styled.div`
+  padding: 0 1em;
+`;
 
 const mapStateToProps = state => ({
   submit: state.submit,
@@ -26,13 +31,7 @@ const mapDispatchToProps = { submitForm };
 const App = (props) => {
   const { formData } = props;
 
-  // check is required data fields in store is valid
-  // and disable submit if not
-  const isFormInvalid = Object.keys(formData).some((key) => {
-    const { type, value } = formData[key];
-    return type ? !validators(type, value) : null;
-  });
-
+  // app supports as positive so negative messages, but negative messaging aren't implemented in this project
   const message =
     props.submit && props.submit === true ? (
       <Message title="Success">Event has been created.</Message>
@@ -43,13 +42,18 @@ const App = (props) => {
     );
 
   const form = (
-    <div>
+    <FormsWrapper>
       <AboutForm />
       <CoordinatorForm />
       <WhenForm />
 
-      <Button title="Publish Event" disabled={isFormInvalid} uppercase clickHandler={() => props.submitForm(props.formData)} />
-    </div>
+      <Button
+        title="Publish Event"
+        disabled={isFormDataInvalid(formData)}
+        uppercase
+        clickHandler={() => props.submitForm(props.formData)}
+      />
+    </FormsWrapper>
   );
 
   return (
