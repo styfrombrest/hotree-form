@@ -63,7 +63,7 @@ class AboutForm extends React.Component {
             placeholder="Fee"
             setData={this.props.setData}
             type="number"
-            inputStyle={{ width: '50px', float: 'left' }}
+            inputStyle={{ maxWidth: '50px' }}
             afterContent="$"
           />
         ) : null}
@@ -76,7 +76,7 @@ class AboutForm extends React.Component {
           placeholder="Number"
           setData={this.props.setData}
           type="number"
-          inputStyle={{ width: '65px', float: 'left' }}
+          inputStyle={{ maxWidth: '65px' }}
           afterContent="reward points for attendance"
         />
       </Form>

@@ -7,11 +7,11 @@ import FormItem from './../FormItem/';
 import { validator } from './../../validators/';
 
 const Input = styled.input`
-  width: 65%;
-  float: left;
+  flex: 1;
   height: 28px;
   border: 1px solid ${color.silver};
   padding: 5px;
+  margin: 0 10px 0 0;
 
   ::placeholder {
     color: ${color.silver};

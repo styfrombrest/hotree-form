@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { color } from './../../consts';
+import { color, minWidthForm } from './../../consts';
 
 const FormItem = styled.div`
   && {
-    margin-top: 2em;
+    margin-top: 20px;
   }
   background-color: ${color.white};
-  padding: 1em 2em;
+  padding: 10px 20px;
+  min-width: ${minWidthForm};
 
   .error div,
   .error input,
@@ -23,7 +24,7 @@ const Title = styled.h2`
   font-weight: 400;
   text-align: left;
   border-bottom: 1px solid ${color.silver};
-  padding: 0.5em 0 0.5em;
+  padding: 10px 0 10px;
 `;
 
 const Form = props => (

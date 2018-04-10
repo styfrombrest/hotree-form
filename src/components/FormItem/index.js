@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { color } from './../../consts';
+import { color, flexBasis, minWidthForm } from './../../consts';
 
 const FormItem = styled.div`
-  padding: 14px 0 0;
+  padding: 10px 0 0;
+  display: flex;
+  flex-basis: ${flexBasis};
+  flex-wrap: wrap;
   ::after {
     content: '';
     clear: both;
@@ -15,30 +18,35 @@ const FormItem = styled.div`
 const Title = styled.div`
   text-transform: uppercase;
   text-align: left;
-  float: left;
-  min-width: 120px;
+  flex: 1;
+  min-width: 115px;
   color: ${color.blue};
   opacity: 0.8;
   margin: 10px 0;
 `;
 
 const Body = styled.div`
-  float: left;
-  width: 78%;
+  flex: 3;
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: ${flexBasis};
+  min-width: ${minWidthForm};
   margin: 10px 0;
-
-  &:after {
-    content: "${props => props.afterContent}";
-    float: left;
-  }
 `;
 
 const Emphasize = styled.span`
   color: ${color.red};
 `;
 
+const AfterContent = styled.div`
+  line-height: 28px;
+  margin-right: 15px;
+  &&& {
+    color: ${color.black};
+  }
+`;
+
 const Error = styled(Emphasize)`
-  float: left;
   line-height: 28px;
 `;
 
@@ -51,8 +59,10 @@ const Item = props => (
         {props.title && props.title.length > 0 && props.required ? <Emphasize> *</Emphasize> : ''}
       </Title>
     ) : null}
-    <Body afterContent={props.afterContent}>
-      {props.children} {props.error ? <Error>Enter correct value</Error> : null}
+    <Body>
+      {props.children}
+      {props.afterContent ? <AfterContent>{props.afterContent}</AfterContent> : null}
+      {props.error ? <Error>Enter correct value</Error> : null}
     </Body>
   </FormItem>
 );

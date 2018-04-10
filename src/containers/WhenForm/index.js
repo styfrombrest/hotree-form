@@ -53,13 +53,13 @@ class WhenForm extends React.Component {
           min={moment().format('YYYY-MM-DD')}
         />
         <Input
-          title=""
+          title="At"
           name="time"
           data={{ ...time, status: dateTimeCheck() }}
           required
           setData={handleChange}
           type="time"
-          inputStyle={{ width: '95px', float: 'left' }}
+          inputStyle={{ maxWidth: '95px' }}
         />
         <Input
           title="Duration"
@@ -69,7 +69,7 @@ class WhenForm extends React.Component {
           placeholder="Duration"
           setData={this.props.setData}
           type="number"
-          inputStyle={{ width: '80px', float: 'left' }}
+          inputStyle={{ maxWidth: '80px' }}
           afterContent="hour"
         />
       </Form>

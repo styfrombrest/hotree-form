@@ -1,27 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { color, dataFieldPropType } from './../../consts';
+import { dataFieldPropType, hintFontStyle } from './../../consts';
 
 import FormItem from './../FormItem';
 
 const SelectWrapper = styled.div`
-  margin: auto 1em;
-  width: 100%;
-  float: left;
+  flex: 1;
+  margin: 0 10px 0 0;
 `;
 
 const SelectItem = styled.select`
-  float: left;
   width: 100%;
 `;
 
 const SelectHint = styled.div`
-  color: ${color.silver};
-  text-align: left;
-  font-size: 0.75em;
-  font-style: italic;
-  float: left;
+  ${hintFontStyle};
 `;
 
 const Select = (props) => {

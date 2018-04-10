@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { color, dataFieldPropType, inputMaxLength } from './../../consts';
+import { color, dataFieldPropType, inputMaxLength, minWidthForm, hintFontStyle } from './../../consts';
 
 import FormItem from './../FormItem/';
 import { validator } from './../../validators/';
 
 const TextareaWrapper = styled.div`
-  width: 100%;
-  float: left;
-  margin: auto 1em;
+  flex: 1;
+  min-width: ${minWidthForm};
+  padding: 0 10px 0 0;
 `;
 
 const Textarea = styled.textarea`
   width: 100%;
-  padding: 0.5em;
+  padding: 10px;
   border: 1px solid ${color.silver};
   resize: none;
 
@@ -23,19 +23,15 @@ const Textarea = styled.textarea`
   }
 `;
 
-const TextareaHint = styled.div`
-  color: ${color.silver};
-  text-align: left;
-  font-size: 0.75em;
-  font-style: italic;
+const HintFont = styled.div`
+  ${hintFontStyle};
+`;
+
+const TextareaHint = styled(HintFont)`
   float: left;
 `;
 
-const TextareaCounter = styled.div`
-  color: ${color.silver};
-  text-align: left;
-  font-size: 0.75em;
-  font-style: italic;
+const TextareaCounter = styled(HintFont)`
   float: right;
 `;
 

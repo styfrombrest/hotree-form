@@ -17,6 +17,8 @@ export const headerBgColor = color.blue;
 export const headerBorderColor = '#1e3b68';
 
 export const inputMaxLength = 140;
+export const flexBasis = '130px';
+export const minWidthForm = '300px';
 
 export const messageBgColor = {
   success: color.whiteIceGreen,
@@ -59,3 +61,10 @@ export const SET_EVENT_DATETIME = 'SET_EVENT_DATETIME';
 export const SUBMIT_FORM_START = 'SUBMIT_FORM_START';
 export const SUBMIT_FORM_SUCCESS = 'SUBMIT_FORM_SUCCESS';
 export const SUBMIT_FORM_FAILURE = 'SUBMIT_FORM_FAILURE';
+
+export const hintFontStyle = `
+  color: ${color.silver};
+  text-align: left;
+  font-size: 12px;
+  font-style: italic;
+`;
