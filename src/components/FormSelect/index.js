@@ -23,8 +23,16 @@ const Select = (props) => {
     title, required, placeholder, list, hint, data, defaultValue,
   } = props;
 
+  const isInteger = (num) => {
+    if (typeof Number.isInteger === 'function') {
+      return Number.isInteger(num);
+    }
+    // IE support
+    return (num ^ 0) === num; // eslint-disable-line no-bitwise
+  };
+
   const handleChange = (event) => {
-    props.setData(props.name, Number.isInteger(+event.target.value) ? +event.target.value : event.target.value);
+    props.setData(props.name, isInteger(+event.target.value) ? +event.target.value : event.target.value);
   };
 
   const listView = list.map(item => (

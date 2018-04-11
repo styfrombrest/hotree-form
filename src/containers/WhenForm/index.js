@@ -59,7 +59,7 @@ class WhenForm extends React.Component {
           required
           setData={handleChange}
           type="time"
-          inputStyle={{ maxWidth: '95px' }}
+          inputStyle={{ maxWidth: '105px' }}
         />
         <Input
           title="Duration"
