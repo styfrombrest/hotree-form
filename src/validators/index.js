@@ -39,7 +39,6 @@ export const isFormDataInvalid = formData =>
     const {
       type, value, depend, status,
     } = formData[key];
-    console.log(key, '!STATUS:', !status, !validator(type, value));
 
     // some of fields are necessary only if its dependencies has concrete values(e.g. fee)
     let isNecessaryToCheck = true;
@@ -52,7 +51,15 @@ export const isFormDataInvalid = formData =>
         return false;
       });
     }
-
+    /*     console.log(
+      key,
+      '!STATUS:',
+      !status,
+      'VAL:',
+      !validator(type, value),
+      'RESULT:',
+      isNecessaryToCheck && !status && type ? !validator(type, value) : null,
+    ); */
     // validation
     return isNecessaryToCheck && !status && type ? !validator(type, value) : null;
   });

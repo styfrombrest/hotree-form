@@ -80,7 +80,7 @@ const initialState = {
     },
     time: {
       value: null,
-      type: 'text',
+      type: 'date',
       status: null,
     },
     duration: {

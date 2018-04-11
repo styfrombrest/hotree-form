@@ -38,6 +38,7 @@ const FormInput = (props) => {
         style={inputStyle}
         min={min}
         max={max}
+        maxLength="255"
       />
     </FormItem>
   );
