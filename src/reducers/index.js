@@ -61,7 +61,7 @@ const initialState = {
       status: null,
     },
     email: {
-      value: 'test@test.com',
+      value: null,
       type: 'email',
       status: null,
     },

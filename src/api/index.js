@@ -2,8 +2,6 @@ import moment from 'moment';
 import phones from './../mocks/categories.json';
 import employees from './../mocks/employees.json';
 
-const duration = moment.duration(2, 'seconds');
-
 export const fetchCategoriesApi = async () =>
   new Promise((resolve) => {
     // Mock for categories
@@ -54,8 +52,6 @@ export const submitFormApi = async formData =>
     if (output.paid_event === true) {
       output.event_fee = +formData.eventFee.value;
     }
-    // debugger; //eslint-disable-line
-    console.log(moment, moment.duration, formData.duration.value, moment.duration(+formData.duration.value, 'hours'));
     output.duration = moment.duration(+formData.duration.value, 'hours').asSeconds();
     console.log(output); // eslint-disable-line
 
